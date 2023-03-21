@@ -13,7 +13,7 @@
 
     <header>
         <h2>Bem Vindo 😁</h2> <br>
-        <button onclick="InserirPost()"><h2 class="post">Escrever Post</h2></button>
+        <a href="inicio.html"><h2 class="post">Escrever Post</h2></a>
     </header>
 
         <table id="table_twitter">
@@ -24,10 +24,6 @@
 <script>
 
 preencherHistorico()
-        
-function InserirPost(){
-        window.location.href = "./inicio.html"
-    }
 
         function preencherHistorico() {
             $("#table_twitter").not(':first').remove();
