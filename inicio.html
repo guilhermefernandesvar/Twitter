@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h2>Bem Vindo 😁</h2> <br>
+        <button onclick="InserirPost()"><h2 class="post">Escrever Post</h2></button>
+    </header>
+
+        <table id="table_twitter">
+
+        </table>
+    </body>
+</html>
+<script>
+
+preencherHistorico()
+        
+function InserirPost(){
+        window.location.href = "./index.html"
+    }
+
+        function preencherHistorico() {
+            $("#table_twitter").not(':first').remove();
+            var html = '';
+        
+        $.ajax({
+        url: "http://localhost:2122/Post",
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+            for(var i = 0; i < response.length; i++) {
+                html +=  '<table>'+'<tr>' +
+                    '<td>' + response[i].titulo + ': ' + '<p class="msg">' + response[i].mensagem + '</td>' + '</p>' + '<br>' +
+                    '</tr>' + '</table>';
+            }
+
+            $("#table_twitter").first().after(html);
+        },
+        error: function (request, message, error){
+                    alert(error)
+                }
+       })
+    }
+</script>

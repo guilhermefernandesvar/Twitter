@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <label for="txt_Titulo">Nome ou titulo:</label>
+    <input type="text" placeholder="Digite o Titulo:" id="txt_Titulo"> <br>   
+  
+    <label for="txt_Mensagem">Mensagem</label>
+    <input type="text" placeholder="Digite sua Mensagem:" id="txt_Mensagem"> 
+
+    <button onclick="Processar()">Teste</button>
+
+</body>
+</html>
+<script>
+
+    function Processar(token) {
+        var request = {
+            "Titulo": $("#txt_Titulo").val(),
+            "Mensagem": $("#txt_Mensagem").val(),
+        }
+
+        $.ajax({
+                url: "http://localhost:2122/Post",
+                type: "POST",
+                data: JSON.stringify(request),
+                contentType: "application/json",
+                headers: { 'Authorization': 'Bearer ' + token},
+                dataType: "json",
+                success: function(resposta) {
+                    window.location.href = "./inicio.html"
+                },
+                error: function (request, message, error){
+                    alert("Não Conceguimos nos conectar com a API")
+                }
+            })
+        }
+
+</script>
